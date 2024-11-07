@@ -1,0 +1,108 @@
+@startuml
+hide empty attributes
+hide methods
+
+
+
+entity Book{
+    - id: Long
+    - title:String
+    - author: Author[]
+    - isbn: String
+    - image: Image
+    - publicationDate: LocalDateTime
+    - genre: Genre
+}
+
+class Image <Value Object> <<V, blue>>{
+    - id: Long
+    - description: String
+    - path: String
+}
+
+enum Genre{
+    SCI-FI
+    FANTASY
+    MYSTERY
+    THRILLER
+    ROMANCE
+    HISTORICAL FICTION
+    BIOGRAPHY
+    SELF-HELP
+    HISTORY
+    SCIENCE & NATURE
+}
+
+entity Review {
+    - id: Long
+    - readerId: Reader
+    - bookId: Book
+    - rating: int
+    - reviewText: String
+    - date: LocalDateTime
+}
+
+class Shelf{
+    - id: Long
+    - reader: Reader
+    - category: Category
+    - listBook: List<Book>
+}
+
+abstract class Person{
+    - id: Long
+    - username: String
+    - firstName:String
+    - lastName:String
+    - birthdate: LocalDateTime
+    - accountCreatedAt: LocalDateTime
+    - email: Email
+    - password:String
+}
+
+class Email <Value Object> <<V, blue>>{
+    - value: String
+}
+
+entity Reader extends Person{
+    - addReview(): void
+    - rateBook(): void
+    - addToShelf(): void
+}
+
+entity Author extends Person{
+    - nationality: Country
+    - bio: String
+    - getBooks(): List<Book>
+}
+
+enum Category{
+WANT TO READ
+CURRENTLY READING
+READ
+}
+
+enum Country {
+AUSTRIA
+FRANCE
+GERMANY
+JAPAN
+KYRGYZSTAN
+RUSSIA
+USA
+}
+
+' Relationships
+Person *-up-Email
+Book .right.> Genre
+Author .right.>Country
+Book "1" o-up->"1..3" Author
+Review "0..*" <-right-*"1" Book
+Review "0..*" <-down-*"1" Reader
+Shelf "0..*" o-down-> "0..*" Book
+Reader "1" *-right->"0..n" Shelf
+Shelf .right.>Category: < embedded
+Book "1"*.left."1"Image: < embedded
+
+
+@enduml
