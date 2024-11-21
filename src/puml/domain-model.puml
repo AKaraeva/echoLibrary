@@ -7,10 +7,10 @@ hide methods
 entity Book{
     - id: Long
     - title:String
-    - author: Author[]
+    - author: List<Author>
     - isbn: String
     - image: Image
-    - publicationDate: LocalDateTime
+    - publicationDate: int
     - genre: Genre
 }
 
@@ -73,7 +73,7 @@ entity Reader extends Person{
 entity Author extends Person{
     - nationality: Country
     - bio: String
-    - getBooks(): List<Book>
+    - writtenBooks: List<Book>
 }
 
 enum Category{
