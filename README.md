@@ -26,7 +26,7 @@ Real-time updates of book ratings and comments.
 
 **Backend:** Spring Boot<br>
 **Frontend:** Vaadin<br>
-**Database:** H2<br>
+**Database:** PostgreSQL<br>
 **APIs:** RESTful endpoints for client-server communication.<br>
 
 ## Installation
