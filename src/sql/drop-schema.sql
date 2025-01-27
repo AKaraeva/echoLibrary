@@ -1,0 +1,12 @@
+drop table if exists authors cascade ;
+drop table if exists authors_written_books cascade ;
+drop table if exists books cascade ;
+drop table if exists person cascade ;
+drop table if exists readers cascade ;
+drop table if exists reviews_to_books cascade ;
+drop table if exists shelf_books cascade ;
+drop table if exists shelves cascade ;
+drop sequence if exists books_seq;
+drop sequence if exists person_seq;
+drop sequence if exists reviews_to_books_seq;
+drop sequence if exists shelves_seq;
