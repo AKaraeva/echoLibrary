@@ -3,6 +3,7 @@
 bookEcho is a Java-based project designed to enhance the reading experience by allowing users to interact with books in a digital space. Users can leave comments, rate books, and organize them into a personalized virtual shelf.
 
 ## Features
+
 **1. Rate Books**
 
 Users can give books a star rating to express their overall enjoyment or opinion.
@@ -26,24 +27,24 @@ Real-time updates of book ratings and comments.
 
 **Backend:** Spring Boot<br>
 **Frontend:** Vaadin<br>
-**Database:** PostgreSQL<br>
+**Database:** H2<br>
 **APIs:** RESTful endpoints for client-server communication.<br>
 
 ## Installation
 
-1. Clone the repository:
+1.  Clone the repository:
 
         git clone https://github.com/AKaraeva/echoLibrary.git
 
-2. Navigate to the project directory:
+2.  Navigate to the project directory:
 
         cd echoLibrary
 
-3. Build the project:
+3.  Build the project:
 
         mvn clean install
 
-4. Run the application:
+4.  Run the application:
 
         java -jar target/echoLibrary.jar
 
