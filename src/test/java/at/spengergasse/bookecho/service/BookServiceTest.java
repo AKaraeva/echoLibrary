@@ -3,6 +3,7 @@ package at.spengergasse.bookecho.service;
 import at.spengergasse.bookecho.domain.Book;
 import at.spengergasse.bookecho.persistence.AuthorRepository;
 import at.spengergasse.bookecho.persistence.BookRepository;
+import jakarta.persistence.PersistenceException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -10,10 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
 import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assumptions.assumeThat;
 import static org.mockito.Mockito.*;
 
@@ -27,9 +27,9 @@ class BookServiceTest {
 
     @BeforeEach
     void setUp() {
-       assumeThat(bookRepository).isNotNull();
-       //assumeThat(authorRepository).isNotNull();
-       bookService = new BookService(bookRepository);
+        assumeThat(bookRepository).isNotNull();
+        //assumeThat(authorRepository).isNotNull();
+        bookService = new BookService(bookRepository);
     }
     @Test
     void will_return_optional_with_book (){
@@ -53,7 +53,15 @@ class BookServiceTest {
     }
 
     @Test
-    void will_return_service_exception_for_persistence_exception (){
-        //to implement in the next iteration (Service/WebTests, 38 min)
+    void will_throw_service_exception_for_persistence_exception(){
+        var title = "1984";
+        var isbn = "9783161484100";
+
+        when(bookRepository.save(any(Book.class))).thenThrow(new PersistenceException());
+
+        assertThatThrownBy(()->bookService.createBook(title, isbn))
+                .isInstanceOf((ServiceException.class));
+
+        verify(bookRepository).save(any(Book.class));
     }
 }

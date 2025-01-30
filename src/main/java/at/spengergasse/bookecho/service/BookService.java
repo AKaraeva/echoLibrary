@@ -2,6 +2,7 @@ package at.spengergasse.bookecho.service;
 
 import at.spengergasse.bookecho.domain.Book;
 import at.spengergasse.bookecho.persistence.BookRepository;
+import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,11 @@ public class BookService {
     private final BookRepository bookRepository;
 
     public Optional <Book> createBook(@NotNull String title, @NotNull String isbn) {
-        return Optional.of(bookRepository.save(Book.builder().title(title).isbn(isbn).build()));
+        try {
+            return Optional.of(bookRepository.save(Book.builder().title(title).isbn(isbn).build()));            }
+        catch (PersistenceException pEx) {
+            throw ServiceException.whileSavingUser(title, isbn, pEx);
+        }
     }
 }
+

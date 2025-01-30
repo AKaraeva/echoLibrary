@@ -4,10 +4,7 @@ import at.spengergasse.bookecho.persistence.converter.GenreConverter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
 
 @Entity
 @Table(name ="books")
@@ -49,6 +47,9 @@ public class Book {
 
     @OneToMany(mappedBy = "book")
     private List<Review> reviews;
+
+    public Book(@NotNull String title) {
+    }
 
     @Embeddable
     public record BookId(@GeneratedValue @NotNull Long id) {}
