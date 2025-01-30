@@ -1,0 +1,9 @@
+### create a new book
+POST http://localhost:8080/api/books
+Content-Type: application/json
+Accept:application/json
+
+{
+  "title": "Determined" ,
+  "isbn": "978-3-16-148410-0"
+}
