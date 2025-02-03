@@ -4,6 +4,7 @@ import at.spengergasse.bookecho.presentation.api.commands.CreateBookCommand;
 import at.spengergasse.bookecho.service.BookService;
 import at.spengergasse.bookecho.domain.Book;
 import at.spengergasse.bookecho.presentation.api.dtos.BookDtos;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +21,13 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/books")
 public class BookRestController {
+
     private final BookService bookService;
 
     @PostMapping
-    public ResponseEntity <BookDtos.BasicInfoDto> createBook(@NotNull @RequestBody CreateBookCommand cmd) {
-        var createdAlbum = bookService.createBook(cmd.title(), cmd.isbn());
-        return createdAlbum
+    public ResponseEntity <BookDtos.BasicInfoDto> createBook(@NotNull @Valid @RequestBody CreateBookCommand cmd) {
+        var createdBook = bookService.createBook(cmd.title(), cmd.isbn());
+        return createdBook
                 .map(book->ResponseEntity.created(URI.create(createSelfLink(book)))
                         .body(BookDtos.BasicInfoDto.of(book)))
                 .orElse(ResponseEntity.badRequest().build());

@@ -22,7 +22,7 @@ public class BookService {
         try {
             return Optional.of(bookRepository.save(Book.builder().title(title).isbn(isbn).build()));            }
         catch (PersistenceException pEx) {
-            throw ServiceException.whileSavingUser(title, isbn, pEx);
+            throw ServiceException.whileSavingBook(title, isbn, pEx);
         }
     }
 }
