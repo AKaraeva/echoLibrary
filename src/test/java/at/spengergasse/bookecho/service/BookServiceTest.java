@@ -40,15 +40,13 @@ class BookServiceTest {
 
         //when
         when(bookRepository.save(any(Book.class))).thenReturn(book);
+
+        Book createdBook = bookService.createBook(title, isbn);
+
         //then
-        Optional<Book> createdBook = bookService.createBook(title, isbn);
-        assertThat(createdBook).isPresent()
-                .hasValueSatisfying(
-                        someBook -> {
-                            assertThat(someBook.getTitle()).isEqualTo(title);
-                            assertThat(someBook.getIsbn()).isEqualTo(isbn);
-                        }
-                );
+        assertThat(createdBook).isNotNull();
+        assertThat(createdBook.getTitle()).isEqualTo(title);
+        assertThat(createdBook.getIsbn()).isEqualTo(isbn);
         verify(bookRepository).save(any(Book.class));
     }
 

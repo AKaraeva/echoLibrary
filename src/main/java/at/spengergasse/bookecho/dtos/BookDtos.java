@@ -1,4 +1,4 @@
-package at.spengergasse.bookecho.presentation.api.dtos;
+package at.spengergasse.bookecho.dtos;
 
 import at.spengergasse.bookecho.domain.Book;
 
