@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name ="readers")
-public class Reader extends Person {
+public class Reader extends User {
 
     @OneToMany(mappedBy = "reader")
     private List<Shelf> shelves;

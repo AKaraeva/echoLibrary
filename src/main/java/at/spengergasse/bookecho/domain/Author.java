@@ -14,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Table(name ="authors")
-public class Author extends Person{
+public class Author extends User {
     @NotNull
     @Column(columnDefinition = CountryConverter.COLUMN_DEFINITION)
     private Country nationality;

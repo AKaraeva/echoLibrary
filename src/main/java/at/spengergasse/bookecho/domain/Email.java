@@ -1,6 +1,8 @@
 package at.spengergasse.bookecho.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+
 import java.util.Objects;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;

@@ -6,6 +6,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -13,7 +15,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Person extends AbstractPersistable<Long> {
+public class User extends AbstractPersistable<Long> {
 
     @Embedded
     @AttributeOverrides({
@@ -48,9 +50,9 @@ public class Person extends AbstractPersistable<Long> {
     //@Embeddable
     //public record PersonId(@GeneratedValue @NotNull Long id) {}
 
-    public Person(Username username, Lastname lastname, Firstname firstname,
-                  LocalDate birthdate, LocalDateTime accountCreatedAt,
-                  Email email, String password) {
+    public User(Username username, Lastname lastname, Firstname firstname,
+                LocalDate birthdate, LocalDateTime accountCreatedAt,
+                Email email, String password) {
         this.username = username;
         this.lastname = lastname;
         this.firstname = firstname;
@@ -58,5 +60,15 @@ public class Person extends AbstractPersistable<Long> {
         this.accountCreatedAt = accountCreatedAt;
         this.email = email;
         this.password = password;
+    }
+
+    public User(Firstname firstName,
+                Lastname lastName,
+                String emailAddress,
+                String encodedPassword) {
+        this.firstname = firstName;
+        this.lastname = lastName;
+        this.email = new Email(emailAddress);
+        this.password = encodedPassword;
     }
 }

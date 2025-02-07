@@ -5,6 +5,11 @@ import at.spengergasse.bookecho.domain.*;
 import java.util.List;
 
 public class FixtureFactory {
+
+    public static User user() {
+        return new User(Firstname.of("Max"), Lastname.of("Musterman"), "gdn@spg.at", "password");
+    }
+
     public static Author author(){
         return Author.builder()
                 .lastname(Lastname.of("Sapolsky"))
